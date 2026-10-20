@@ -40,7 +40,7 @@ button:disabled { opacity:.55; cursor:wait; }
 #result a { color:var(--accent); font-weight:700; }
 main.wrap { padding-bottom:180px; }
 .res-bar { display:flex; align-items:center; gap:14px; background:var(--pill); border:1px solid var(--border); border-radius:12px; padding:12px 16px; margin-bottom:12px; }
-.res-bar img { width:56px; height:auto; flex:none; }
+.res-bar img { width:72px; margin:-6px 0; height:auto; flex:none; }
 .res-bar a { color:var(--accent); font-weight:700; }
 .lookup { position:relative; }
 #acList { position:absolute; left:0; right:0; top:100%; z-index:5; background:#fff; border:1px solid var(--border); border-radius:8px; margin-top:4px; box-shadow:0 6px 18px rgba(26,58,74,.12); display:none; max-height:260px; overflow:auto; }
@@ -53,7 +53,7 @@ main.wrap { padding-bottom:180px; }
 <main class="wrap">
 <h1>Property Improvement Plan</h1>
 <p class="lead">Tick the improvements this property needs. Only ticked items and areas with content go to the owner. Owner wording is shown under each item.</p>
-<div class="res-bar"><img src="https://analysis-maker.github.io/phh-property-improvement-plan/setup-checklist-thumb.jpg" alt=""><div><span class="k" style="margin:0">Reference</span>Ultimate Holiday Home Setup Checklist: <a href="https://drive.google.com/file/d/1P_8-Lgpmx0Ky7cFb1yYppRK0wO8muU4d/view" target="_blank" rel="noopener">PDF</a> | <a href="https://docs.google.com/spreadsheets/d/1rQT43fvyasBy4QBe74mr5pNUlz9JvriNPNqKgqBzNl8/edit" target="_blank" rel="noopener">Sheet</a></div></div>
+<div class="res-bar"><img src="https://analysis-maker.github.io/phh-property-improvement-plan/setup-checklist-thumb.png" alt=""><div><span class="k" style="margin:0">Reference</span>Ultimate Holiday Home Setup Checklist: <a href="https://drive.google.com/file/d/1P_8-Lgpmx0Ky7cFb1yYppRK0wO8muU4d/view" target="_blank" rel="noopener">PDF</a> | <a href="https://docs.google.com/spreadsheets/d/1rQT43fvyasBy4QBe74mr5pNUlz9JvriNPNqKgqBzNl8/edit" target="_blank" rel="noopener">Sheet</a></div></div>
 <div class="card"><div class="grid">
   <div><span class="k req">Property address</span><input type="text" id="addr" placeholder="e.g. 14 Prince Edward Avenue, Culburra Beach NSW 2540"></div>
   <div class="lookup"><span class="k">Owner name</span><input type="text" id="owner" placeholder="Type a name or email to search ActiveCampaign" autocomplete="off"><div id="acList"></div><div class="hint" id="acHint"></div></div>
