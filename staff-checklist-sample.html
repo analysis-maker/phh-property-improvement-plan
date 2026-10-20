@@ -161,7 +161,7 @@ document.getElementById('owner').addEventListener('input', function () { clearTi
 document.addEventListener('click', function (e) { if (!e.target.closest('.lookup')) acHide(); });
 ['nLiv','nBed','nBth'].forEach(function (id) { document.getElementById(id).onchange = render; });
 document.getElementById('pvBtn').onclick = function () { var p=document.getElementById('preview'); p.style.display = p.style.display==='block'?'none':'block'; preview(); };
-document.getElementById('genBtn').onclick = function () { showResult(false, 'This is a static sample. The working version runs in n8n.'); };
+document.getElementById('genBtn').onclick = function () { showResult(false, 'This is a sample page and cannot make PDFs. Use the live checklist link Ian sent you.'); };
 if (!LIB.length) showResult(false, 'The recommendation library could not be loaded. Check the library Sheet.');
 render();
 </script></body></html>
