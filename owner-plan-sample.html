@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Property Improvement Plan</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap">
+<style>
+@page { size:A4 portrait; margin:14mm 15mm 16mm; }
+:root { --ink:#1a3a4a; --body:#33414f; --grey:#6f7986; --accent:#0873B5; --sky:#55b9d7;
+  --pill:#d6edf4; --pilltext:#1E6FA0; --card:#f4f8fb; --border:#c9d5df; --rule:#dce5ec; --foot:#8a96a5; }
+* { box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { margin:0; font:10.5pt/1.5 'Raleway',Helvetica,sans-serif; color:var(--body); background:#fff; }
+.top { display:flex; justify-content:space-between; align-items:center; padding-bottom:5mm; border-bottom:0.3mm solid var(--rule); }
+.top img { height:11mm; width:auto; display:block; }
+.pill { background:var(--pill); color:var(--pilltext); border-radius:20mm; padding:1.6mm 4mm; font-size:7.5pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap; }
+.pill:before { content:""; display:inline-block; width:1.6mm; height:1.6mm; border-radius:50%; background:var(--accent); margin-right:2mm; vertical-align:.3mm; }
+h1 { font-weight:800; color:var(--ink); font-size:24pt; line-height:1.12; letter-spacing:-.015em; margin:7mm 0 2.5mm; }
+.lead { font-size:11.5pt; color:var(--grey); margin:0 0 6mm; max-width:160mm; }
+.hero { display:grid; grid-template-columns:1fr 52mm; gap:4mm; margin-bottom:7mm; }
+.box { border-radius:3.5mm; padding:4.5mm 5.5mm; }
+.box.fill { background:var(--accent); color:#fff; }
+.box.line { border:0.3mm solid var(--border); }
+.k { font-size:7pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase; margin-bottom:1.2mm; }
+.box.fill .k { color:#d9ecf7; } .box.line .k { color:var(--accent); }
+.box .v { font-weight:700; font-size:12pt; line-height:1.3; }
+.box.line .v { color:var(--ink); font-size:11pt; }
+.area { break-inside:avoid; page-break-inside:avoid; background:var(--card); border:0.3mm solid var(--border); border-radius:3.5mm; padding:4.5mm 5.5mm; margin-bottom:4mm; }
+.area h2 { font-size:12.5pt; font-weight:700; color:var(--ink); margin:0 0 2.5mm; }
+.area ol { list-style:none; margin:0; padding:0; }
+.area li { display:flex; gap:3mm; margin-bottom:2mm; }
+.n { flex:none; width:5.2mm; height:5.2mm; border-radius:50%; background:var(--accent); color:#fff; font-size:7.5pt; font-weight:700; display:flex; align-items:center; justify-content:center; margin-top:.4mm; }
+.cmt { margin:1mm 0 0; color:var(--grey); font-style:italic; }
+.close { margin:6mm 0 0; color:var(--body); }
+.disc { font-size:7.5pt; color:var(--foot); margin:2.5mm 0 0; }
+.foot { margin-top:7mm; border-top:0.3mm solid var(--rule); padding-top:3mm; display:flex; justify-content:space-between; gap:6mm; font-size:7.5pt; color:var(--foot); }
+</style></head><body>
+<div class="top"><img src="data:image/png;base64,
+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
+AW8mjA/2aC3qAAAAAElFTkSuQmCC" alt="Professional Holiday Homes"><span class="pill">Property improvement plan</span></div>
+<h1>Your Property Improvement Plan</h1>
+<p class="lead">These are recommended improvements to achieve the results sent to you in your property appraisal.</p>
+<div class="hero">
+  <div class="box fill"><div class="k">Property</div><div class="v">SAMPLE - 12 Example Street, Culburra Beach NSW 2540</div></div>
+  <div class="box line"><div class="k">Recommendations</div><div class="v">13 across 7 areas</div></div>
+</div>
+<section class="area"><h2>Overall property</h2><ol><li><span class="n">1</span><span>Install a dishwasher, washing machine and tumble dryer. A heat pump dryer is quieter and more energy efficient.</span></li><li><span class="n">2</span><span>Supply an espresso machine. A Nespresso compatible pod machine is the simplest option for guests.</span></li><li><span class="n">3</span><span>Install smoke alarms that meet AS 3786 and provide a fire safety certificate before the property goes live.</span></li></ol><p class="cmt">The kitchen is a strong feature. Adding the items above brings it up to guest expectations.</p></section><section class="area"><h2>Exterior</h2><ol><li><span class="n">1</span><span>Install keyless entry or a combination lock box at the front door. Please avoid systems that need a new code for each guest or an app.</span></li><li><span class="n">2</span><span>Supply a quality BBQ sized for the guest capacity (no cheap flat plate models), with cleaning tools and two gas cylinders.</span></li></ol></section><section class="area"><h2>Garden</h2><ol><li><span class="n">1</span><span>Fully enclose the garden with no gaps in the fencing (or add a fenced dog run) so the property can be marketed as pet friendly.</span></li></ol><p class="cmt">Most of the fence is sound. The gap is along the rear boundary near the shed.</p></section><section class="area"><h2>Living area 1</h2><ol><li><span class="n">1</span><span>Install a large smart TV (75 inch where space allows), or add a Google TV device to an existing TV.</span></li><li><span class="n">2</span><span>Add lamps for reading and evening lighting. Dimmer switches also help create atmosphere.</span></li></ol></section><section class="area"><h2>Bedroom 2</h2><ol><li><span class="n">1</span><span>Upgrade the double bed to a queen bed.</span></li><li><span class="n">2</span><span>Fit blackout blinds or curtains.</span></li></ol></section><section class="area"><h2>Bedroom 3</h2><ol><li><span class="n">1</span><span>Provide a fan and a heater, as the room has no air conditioning. Oil column heaters are a safe, low-cost option.</span></li></ol></section><section class="area"><h2>Bathroom 1</h2><ol><li><span class="n">1</span><span>Supply shampoo, conditioner, shower gel and hand soap in a pump dispenser.</span></li><li><span class="n">2</span><span>Supply a hair dryer.</span></li></ol></section><section class="area"><h2>Other comments</h2><p class="cmt">Once these improvements are in place we are happy to review the property again before it goes live.</p></section>
+<p class="close">If you have any questions about this plan, email us at enquiries@professionalholidayhomes.com.au.</p>
+<p class="disc">These recommendations accompany your appraisal, which is an estimate based on prior results. Income is not guaranteed and results will vary with market conditions and other factors.</p>
+<div class="foot"><span>Professional Holiday Homes | (02) 9194 4411 | enquiries@professionalholidayhomes.com.au<br>2 Bridge St, Epping NSW 2121 | NSW licence 10102113</span><span style="text-align:right">Property Improvement Plan<br>October 2026</span></div>
+</body></html>
