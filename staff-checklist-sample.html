@@ -166,9 +166,9 @@ function acSearch() {
     if (seq !== acSeq) return;
     var list = (j && j.contacts) || [], box = document.getElementById('acList');
     hint.textContent = list.length ? '' : 'No match in ActiveCampaign. Type the details in.';
-    box.innerHTML = list.map(function (c, i) { return '<button type="button" data-i="' + i + '">' + esc(c.name || c.email) + '<small>' + esc(c.email) + (c.phone ? ' | ' + esc(c.phone) : '') + '</small></button>'; }).join('');
+    box.innerHTML = list.map(function (c, i) { return '<button type="button" data-i="' + i + '">' + esc(c.name || c.email) + '<small>' + esc(c.email) + (c.phone ? ' | ' + esc(c.phone) : '') + '</small>' + (c.address ? '<small>' + esc(c.address) + '</small>' : '') + '</button>'; }).join('');
     box.style.display = list.length ? 'block' : 'none';
-    box.querySelectorAll('button').forEach(function (b) { b.onclick = function () { var c = list[+b.dataset.i]; document.getElementById('owner').value = c.name || ''; document.getElementById('oemail').value = c.email || ''; acHide(); hint.textContent = 'Filled from ActiveCampaign.'; }; });
+    box.querySelectorAll('button').forEach(function (b) { b.onclick = function () { var c = list[+b.dataset.i]; document.getElementById('owner').value = c.name || ''; document.getElementById('oemail').value = c.email || ''; if (c.address) document.getElementById('addr').value = c.address; acHide(); hint.textContent = c.address ? 'Filled from ActiveCampaign.' : 'Filled from ActiveCampaign. No property address on file, type it in.'; }; });
   })
   .catch(function () { if (seq === acSeq) hint.textContent = 'Lookup unavailable. Type the details in.'; });
 }
