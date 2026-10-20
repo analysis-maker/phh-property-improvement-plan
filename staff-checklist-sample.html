@@ -1,8 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PIP Staff Checklist</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap">
 <style>
-:root { --ink:#1a3a4a; --body:#33414f; --grey:#6f7986; --accent:#0873B5; --sky:#55b9d7;
-  --pill:#d6edf4; --pilltext:#1E6FA0; --card:#f4f8fb; --border:#c9d5df; --rule:#dce5ec; --foot:#8a96a5; }
+:root { --ink:#1a3a4a; --body:#33414f; --grey:#6f7986; --accent:#0873B5; --pill:#d6edf4; --pilltext:#1E6FA0; --card:#f4f8fb; --border:#c9d5df; --rule:#dce5ec; --err:#b3261e; }
 * { box-sizing:border-box; }
 body { margin:0; background:#fff; color:var(--body); font:15px/1.5 'Raleway',Helvetica,sans-serif; }
 .wrap { max-width:860px; margin:0 auto; padding:0 16px; }
@@ -12,6 +11,7 @@ header img { height:34px; width:auto; max-width:60vw; }
 h1 { font-weight:800; color:var(--ink); font-size:28px; line-height:1.15; margin:22px 0 6px; }
 .lead { color:var(--grey); margin:0 0 18px; }
 .k { display:block; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:5px; }
+.req:after { content:" *"; color:var(--err); }
 .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:12px; }
 .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
 input[type=text], select, textarea { width:100%; font:inherit; color:var(--body); border:1px solid var(--border); border-radius:8px; padding:9px 10px; background:#fff; }
@@ -31,188 +31,137 @@ details.sec > summary::-webkit-details-marker { display:none; }
 .bar .wrap { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:12px 16px; }
 button { font:700 15px 'Raleway',sans-serif; background:var(--accent); color:#fff; border:0; border-radius:10px; padding:11px 18px; cursor:pointer; }
 button.ghost { background:#fff; color:var(--accent); border:1px solid var(--accent); }
+button:disabled { opacity:.55; cursor:wait; }
 .note { font-size:12px; color:var(--grey); }
 #preview { display:none; } #preview ol { margin:6px 0 0; padding-left:18px; }
-main { padding-bottom:110px; }
+#result { display:none; }
+#result.ok { border-color:var(--accent); }
+#result.bad { border-color:var(--err); color:var(--err); }
+#result a { color:var(--accent); font-weight:700; }
+main.wrap { padding-bottom:180px; }
+.res-bar { display:flex; align-items:center; gap:14px; background:var(--pill); border:1px solid var(--border); border-radius:12px; padding:12px 16px; margin-bottom:12px; }
+.res-bar img { width:56px; height:auto; flex:none; }
+.res-bar a { color:var(--accent); font-weight:700; }
+.lookup { position:relative; }
+#acList { position:absolute; left:0; right:0; top:100%; z-index:5; background:#fff; border:1px solid var(--border); border-radius:8px; margin-top:4px; box-shadow:0 6px 18px rgba(26,58,74,.12); display:none; max-height:260px; overflow:auto; }
+#acList button { display:block; width:100%; text-align:left; background:#fff; color:var(--body); border:0; border-radius:0; padding:9px 12px; font:500 14px Raleway,sans-serif; cursor:pointer; }
+#acList button:hover, #acList button:focus { background:var(--card); }
+#acList small { color:var(--grey); display:block; font-size:12px; }
+.hint { font-size:12px; color:var(--grey); margin-top:4px; min-height:16px; }
 </style></head><body>
-<header><div class="wrap"><img src="data:image/png;base64,
-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
-AW8mjA/2aC3qAAAAAElFTkSuQmCC" alt="Professional Holiday Homes"><span class="pill">Staff only</span></div></header>
+<header><div class="wrap"><img src="https://analysis-maker.github.io/phh-property-improvement-plan/phh-logo.png" alt="Professional Holiday Homes"><span class="pill">Staff only - sample</span></div></header>
 <main class="wrap">
 <h1>Property Improvement Plan</h1>
-<p class="lead">Tick what this property needs. Only ticked items and areas with content go to the owner. Owner wording is shown under each item.</p>
+<p class="lead">Tick the improvements this property needs. Only ticked items and areas with content go to the owner. Owner wording is shown under each item.</p>
+<div class="res-bar"><img src="https://analysis-maker.github.io/phh-property-improvement-plan/setup-checklist-thumb.jpg" alt=""><div><span class="k" style="margin:0">Reference</span>Ultimate Holiday Home Setup Checklist: <a href="https://drive.google.com/file/d/1P_8-Lgpmx0Ky7cFb1yYppRK0wO8muU4d/view" target="_blank" rel="noopener">PDF</a> | <a href="https://docs.google.com/spreadsheets/d/1rQT43fvyasBy4QBe74mr5pNUlz9JvriNPNqKgqBzNl8/edit" target="_blank" rel="noopener">Sheet</a></div></div>
 <div class="card"><div class="grid">
-  <div><span class="k">Property address</span><input type="text" value="SAMPLE - 12 Example Street, Culburra Beach NSW 2540"></div>
-  <div><span class="k">Owner name</span><input type="text" placeholder="e.g. Jane Smith"></div>
-  <div><span class="k">Appraisal type</span><select><option>Better Proposals (owner)</option><option>1 page (agent)</option></select></div>
-  <div><span class="k">Prepared by</span><input type="text" placeholder="Your name"></div>
-  <div><span class="k">Living areas</span><select id="nLiv"><option>1</option><option selected>2</option><option>3</option></select></div>
+  <div><span class="k req">Property address</span><input type="text" id="addr" placeholder="e.g. 14 Prince Edward Avenue, Culburra Beach NSW 2540"></div>
+  <div class="lookup"><span class="k">Owner name</span><input type="text" id="owner" placeholder="Type a name or email to search ActiveCampaign" autocomplete="off"><div id="acList"></div><div class="hint" id="acHint"></div></div>
+  <div><span class="k">Owner email</span><input type="text" id="oemail" placeholder="Filled from ActiveCampaign, or type it"></div>
+  <div><span class="k">Appraisal type</span><select id="atype"><option>Better Proposals (owner)</option><option>1 page (agent)</option></select></div>
+  <div><span class="k req">Prepared by</span><select id="prep"><option selected>Bianca Hamilton-Foster</option><option>Craig Reid</option><option>Ian McDermott</option></select></div>
+  <div><span class="k">Living areas</span><select id="nLiv"><option selected>1</option><option>2</option><option>3</option></select></div>
   <div><span class="k">Bedrooms</span><select id="nBed"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></div>
   <div><span class="k">Bathrooms</span><select id="nBth"><option selected>1</option><option>2</option><option>3</option></select></div>
 </div></div>
 <div id="sections"></div>
 <div class="card" id="preview"><span class="k">What the owner will see</span><div id="pv"></div></div>
+<div class="card" id="result"></div>
 </main>
 <div class="bar"><div class="wrap"><div><b id="tot" style="color:var(--ink)">0 items</b> <span class="note" id="totS">in 0 areas</span></div>
-<div style="display:flex;gap:8px"><button class="ghost" type="button" id="pvBtn">Preview</button><button type="button" title="Sample only, not connected">Generate draft PDF</button></div></div></div>
+<div style="display:flex;gap:8px"><button class="ghost" type="button" id="pvBtn">Preview</button><button type="button" id="genBtn">Generate draft PDF</button></div></div></div>
+<script id="__lib" type="application/json">W3siaXRlbV9pZCI6Ik9WUi0wMSIsInNlY3Rpb24iOiJPdmVyYWxsIHByb3BlcnR5Iiwic3RhZmZfbGFiZWwiOiJEaXNod2FzaGVyIiwib3duZXJfd29yZGluZyI6Ikluc3RhbGwgYSBkaXNod2FzaGVyLiIsIm1hbmRhdG9yeSI6IlkiLCJzb3J0IjoxfSx7Iml0ZW1faWQiOiJPVlItMDIiLCJzZWN0aW9uIjoiT3ZlcmFsbCBwcm9wZXJ0eSIsInN0YWZmX2xhYmVsIjoiV2FzaGluZyBtYWNoaW5lIiwib3duZXJfd29yZGluZyI6Ikluc3RhbGwgYSB3YXNoaW5nIG1hY2hpbmUuIiwibWFuZGF0b3J5IjoiWSIsInNvcnQiOjJ9LHsiaXRlbV9pZCI6Ik9WUi0wMyIsInNlY3Rpb24iOiJPdmVyYWxsIHByb3BlcnR5Iiwic3RhZmZfbGFiZWwiOiJUdW1ibGUgZHJ5ZXIiLCJvd25lcl93b3JkaW5nIjoiSW5zdGFsbCBhIHR1bWJsZSBkcnllci4gQSBoZWF0IHB1bXAgZHJ5ZXIgaXMgcXVpZXRlciBhbmQgbW9yZSBlbmVyZ3kgZWZmaWNpZW50LiIsIm1hbmRhdG9yeSI6IlkiLCJzb3J0IjozfSx7Iml0ZW1faWQiOiJPVlItMDQiLCJzZWN0aW9uIjoiT3ZlcmFsbCBwcm9wZXJ0eSIsInN0YWZmX2xhYmVsIjoiRXNwcmVzc28gbWFjaGluZSIsIm93bmVyX3dvcmRpbmciOiJTdXBwbHkgYW4gZXNwcmVzc28gbWFjaGluZS4gQSBOZXNwcmVzc28gY29tcGF0aWJsZSBwb2QgbWFjaGluZSBpcyB0aGUgc2ltcGxlc3Qgb3B0aW9uIGZvciBndWVzdHMuIiwibWFuZGF0b3J5IjoiWSIsInNvcnQiOjR9LHsiaXRlbV9pZCI6Ik9WUi0wNSIsInNlY3Rpb24iOiJPdmVyYWxsIHByb3BlcnR5Iiwic3RhZmZfbGFiZWwiOiJLaXRjaGVuIGZ1bGx5IGVxdWlwcGVkIiwib3duZXJfd29yZGluZyI6IkZ1bGx5IGVxdWlwIHRoZSBraXRjaGVuIHdpdGggYSBzdG92ZSwgb3ZlbiwgbWljcm93YXZlLCA0LXNsaWNlIHRvYXN0ZXIgYW5kIGtldHRsZSwgcGx1cyBjcm9ja2VyeSwgY3V0bGVyeSBhbmQgZ2xhc3N3YXJlIGZvciB0d2ljZSB0aGUgbWF4aW11bSBndWVzdCBjYXBhY2l0eS4iLCJtYW5kYXRvcnkiOiJZIiwic29ydCI6NX0seyJpdGVtX2lkIjoiT1ZSLTA2Iiwic2VjdGlvbiI6Ik92ZXJhbGwgcHJvcGVydHkiLCJzdGFmZl9sYWJlbCI6IkFpciBjb25kaXRpb25pbmciLCJvd25lcl93b3JkaW5nIjoiSW5zdGFsbCBhaXIgY29uZGl0aW9uaW5nIGluIHRoZSBtYWluIGxpdmluZyBhcmVhcy4iLCJtYW5kYXRvcnkiOiJZIiwic29ydCI6Nn0seyJpdGVtX2lkIjoiT1ZSLTA3Iiwic2VjdGlvbiI6Ik92ZXJhbGwgcHJvcGVydHkiLCJzdGFmZl9sYWJlbCI6Ik5CTiB3aWZpIDUwTWJwcyIsIm93bmVyX3dvcmRpbmciOiJDb25uZWN0IE5CTiB3aWZpIHdpdGggYSBtaW5pbXVtIHNwZWVkIG9mIDUwTWJwcyAobm8gZG9uZ2xlcyksIHdpdGggdGhlIDIuNEdIeiBiYW5kIGVuYWJsZWQuIiwibWFuZGF0b3J5IjoiWSIsInNvcnQiOjd9LHsiaXRlbV9pZCI6Ik9WUi0wOCIsInNlY3Rpb24iOiJPdmVyYWxsIHByb3BlcnR5Iiwic3RhZmZfbGFiZWwiOiJTbW9rZSBhbGFybXMgLyBmaXJlIHNhZmV0eSIsIm93bmVyX3dvcmRpbmciOiJJbnN0YWxsIHNtb2tlIGFsYXJtcyB0aGF0IG1lZXQgQVMgMzc4NiBhbmQgcHJvdmlkZSBhIGZpcmUgc2FmZXR5IGNlcnRpZmljYXRlIGJlZm9yZSB0aGUgcHJvcGVydHkgZ29lcyBsaXZlLCBwbHVzIGEgY2FyYm9uIG1vbm94aWRlIGRldGVjdG9yIGlmIHRoZSBwcm9wZXJ0eSBoYXMgZ2FzIGhlYXRpbmcuIiwibWFuZGF0b3J5IjoiWSIsInNvcnQiOjh9LHsiaXRlbV9pZCI6Ik9WUi0wOSIsInNlY3Rpb24iOiJPdmVyYWxsIHByb3BlcnR5Iiwic3RhZmZfbGFiZWwiOiJIb3Qgd2F0ZXIgc3lzdGVtIiwib3duZXJfd29yZGluZyI6IlVwZ3JhZGUgdGhlIGhvdCB3YXRlciBzeXN0ZW0gdG8gdGhlIG1pbmltdW0gc2l6ZSBmb3IgdGhlIGd1ZXN0IGNhcGFjaXR5LiBBIGhlYXQgcHVtcCBzeXN0ZW0gaXMgcmVjb21tZW5kZWQuIiwibWFuZGF0b3J5IjoiWSIsInNvcnQiOjl9LHsiaXRlbV9pZCI6Ik9WUi0xMCIsInNlY3Rpb24iOiJPdmVyYWxsIHByb3BlcnR5Iiwic3RhZmZfbGFiZWwiOiJGdXJuaXNoaW5nIHN0YW5kYXJkIiwib3duZXJfd29yZGluZyI6IkZ1cm5pc2ggdGhlIHByb3BlcnR5IHRvIGEgZ29vZCBzdGFuZGFyZCB0aHJvdWdob3V0LCByZXBsYWNpbmcgd29ybiwgYnVkZ2V0IG9yIG1pc21hdGNoZWQgcGllY2VzLiIsIm1hbmRhdG9yeSI6IlkiLCJzb3J0IjoxMH0seyJpdGVtX2lkIjoiT1ZSLTExIiwic2VjdGlvbiI6Ik92ZXJhbGwgcHJvcGVydHkiLCJzdGFmZl9sYWJlbCI6IkNvbmRpdGlvbiBhbmQgcHJlc2VudGF0aW9uIiwib3duZXJfd29yZGluZyI6IkJyaW5nIHRoZSBwcm9wZXJ0eSB0byBleGNlbGxlbnQgb3ZlcmFsbCBjb25kaXRpb24sIHdpdGggYSBoaWdoIHN0YW5kYXJkIG9mIGNvc21ldGljIHByZXNlbnRhdGlvbiBpbnNpZGUgYW5kIG91dC4iLCJtYW5kYXRvcnkiOiJZIiwic29ydCI6MTF9LHsiaXRlbV9pZCI6Ik9WUi0xMiIsInNlY3Rpb24iOiJPdmVyYWxsIHByb3BlcnR5Iiwic3RhZmZfbGFiZWwiOiJJbmRvb3IgZmlyZXBsYWNlIiwib3duZXJfd29yZGluZyI6Ikluc3RhbGwgYW4gaW5kb29yIGZpcmVwbGFjZS4gUHJvcGVydGllcyB3aXRoIGZpcmVwbGFjZXMgdHlwaWNhbGx5IHNlZSBtb3JlIGJvb2tpbmdzIGluIHRoZSBjb2xkZXIgbW9udGhzLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0IjoxMn0seyJpdGVtX2lkIjoiRVhULTAxIiwic2VjdGlvbiI6IkV4dGVyaW9yIiwic3RhZmZfbGFiZWwiOiJPdXRkb29yIGRpbmluZyBzZXR0aW5nIiwib3duZXJfd29yZGluZyI6IlByb3ZpZGUgYW4gb3V0ZG9vciBkaW5pbmcgdGFibGUgYW5kIGNoYWlycyB0aGF0IHNlYXQgdGhlIGZ1bGwgZ3Vlc3QgY2FwYWNpdHksIGluIGxvdy1tYWludGVuYW5jZSwgd2VhdGhlci1yZXNpc3RhbnQgbWF0ZXJpYWxzLiIsIm1hbmRhdG9yeSI6IlkiLCJzb3J0IjoxfSx7Iml0ZW1faWQiOiJFWFQtMDIiLCJzZWN0aW9uIjoiRXh0ZXJpb3IiLCJzdGFmZl9sYWJlbCI6IlF1YWxpdHkgQkJRIiwib3duZXJfd29yZGluZyI6Ikluc3RhbGwgYSBxdWFsaXR5IEJCUSBzaXplZCBmb3IgdGhlIGd1ZXN0IGNhcGFjaXR5LCBzdWl0ZWQgdG8gY29hc3RhbCBjb25kaXRpb25zLiIsIm1hbmRhdG9yeSI6IlkiLCJzb3J0IjoyfSx7Iml0ZW1faWQiOiJFWFQtMDMiLCJzZWN0aW9uIjoiRXh0ZXJpb3IiLCJzdGFmZl9sYWJlbCI6Ikluc3RhbGwgYSBzcGEiLCJvd25lcl93b3JkaW5nIjoiSW5zdGFsbCBhbiBvdXRkb29yIHNwYS4gQSBzcGEgaXMgb25lIG9mIHRoZSBzdHJvbmdlc3QgZHJhd2NhcmRzIGZvciBob2xpZGF5IGd1ZXN0cy4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6M30seyJpdGVtX2lkIjoiRVhULTA0Iiwic2VjdGlvbiI6IkV4dGVyaW9yIiwic3RhZmZfbGFiZWwiOiJDb3ZlciB0aGUgZGVjayAvIGFkZCBhIHBlcmdvbGEiLCJvd25lcl93b3JkaW5nIjoiQ292ZXIgdGhlIGRlY2sgb3IgYWRkIGEgcGVyZ29sYSBzbyBndWVzdHMgY2FuIHVzZSB0aGUgb3V0ZG9vciBhcmVhIGluIGFsbCB3ZWF0aGVyLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0Ijo0fSx7Iml0ZW1faWQiOiJFWFQtMDUiLCJzZWN0aW9uIjoiRXh0ZXJpb3IiLCJzdGFmZl9sYWJlbCI6Ik91dGRvb3IgbG91bmdlIiwib3duZXJfd29yZGluZyI6IkNyZWF0ZSBhbiBvdXRkb29yIGxvdW5nZSBhcmVhIHdpdGggY29tZm9ydGFibGUgc2VhdGluZywgYSBkYXliZWQgb3Igc3VuIGxvdW5nZXJzLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0Ijo1fSx7Iml0ZW1faWQiOiJFWFQtMDYiLCJzZWN0aW9uIjoiRXh0ZXJpb3IiLCJzdGFmZl9sYWJlbCI6Ik91dGRvb3IgbGlnaHRpbmciLCJvd25lcl93b3JkaW5nIjoiQWRkIGxpZ2h0aW5nIHRvIHRoZSBkZWNrIGFuZCBvdXRkb29yIGxpdmluZyBhcmVhcyBzbyBndWVzdHMgY2FuIHVzZSB0aGVtIGluIHRoZSBldmVuaW5nLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0Ijo2fSx7Iml0ZW1faWQiOiJFWFQtMDciLCJzZWN0aW9uIjoiRXh0ZXJpb3IiLCJzdGFmZl9sYWJlbCI6IkVudHJ5IHNlbnNvciBsaWdodCIsIm93bmVyX3dvcmRpbmciOiJJbnN0YWxsIGEgc2Vuc29yIGxpZ2h0IGF0IHRoZSBlbnRyeSBkb29yIHNvIGd1ZXN0cyBhcnJpdmluZyBhdCBuaWdodCBjYW4gZmluZCB0aGVpciB3YXkgaW4gc2FmZWx5LiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0Ijo3fSx7Iml0ZW1faWQiOiJFWFQtMDgiLCJzZWN0aW9uIjoiRXh0ZXJpb3IiLCJzdGFmZl9sYWJlbCI6IktleWxlc3MgZW50cnkiLCJvd25lcl93b3JkaW5nIjoiSW5zdGFsbCBrZXlsZXNzIGVudHJ5IGF0IHRoZSBmcm9udCBkb29yLiBQbGVhc2UgYXZvaWQgc3lzdGVtcyB0aGF0IG5lZWQgYSBuZXcgY29kZSBmb3IgZWFjaCBndWVzdCBvciBhbiBhcHAuIiwibWFuZGF0b3J5IjoiTiIsInNvcnQiOjh9LHsiaXRlbV9pZCI6IkVYVC0wOSIsInNlY3Rpb24iOiJFeHRlcmlvciIsInN0YWZmX2xhYmVsIjoiRXh0ZXJpb3IgcmVmcmVzaCIsIm93bmVyX3dvcmRpbmciOiJSZWZyZXNoIHRoZSBleHRlcmlvciwgZm9yIGV4YW1wbGUgcGFpbnRpbmcsIHByZXNzdXJlIGNsZWFuaW5nIGFuZCByZXBhaXJpbmcgdmlzaWJsZSBkYW1hZ2UuIiwibWFuZGF0b3J5IjoiTiIsInNvcnQiOjl9LHsiaXRlbV9pZCI6IkVYVC0xMCIsInNlY3Rpb24iOiJFeHRlcmlvciIsInN0YWZmX2xhYmVsIjoiSG9zZSBvbiByZWVsIiwib3duZXJfd29yZGluZyI6IkZpdCBhIGhvc2Ugb24gYSByZWVsIGZvciBndWVzdHMgdG8gcmluc2UgZG9ncywgY2FycyBvciBib2F0cy4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6MTB9LHsiaXRlbV9pZCI6IkdBUi0wMSIsInNlY3Rpb24iOiJHYXJkZW4iLCJzdGFmZl9sYWJlbCI6IkZ1bGx5IGZlbmNlZCBmb3IgcGV0cyIsIm93bmVyX3dvcmRpbmciOiJGdWxseSBlbmNsb3NlIHRoZSBnYXJkZW4gd2l0aCBubyBnYXBzIGluIHRoZSBmZW5jaW5nIChvciBhZGQgYSBmZW5jZWQgZG9nIHJ1bikgc28gdGhlIHByb3BlcnR5IGNhbiBiZSBtYXJrZXRlZCBhcyBwZXQgZnJpZW5kbHkuIiwibWFuZGF0b3J5IjoiWSIsInNvcnQiOjF9LHsiaXRlbV9pZCI6IkdBUi0wMiIsInNlY3Rpb24iOiJHYXJkZW4iLCJzdGFmZl9sYWJlbCI6IkxhbmRzY2FwZSB0aGUgYmFjayBnYXJkZW4iLCJvd25lcl93b3JkaW5nIjoiTGFuZHNjYXBlIHRoZSBiYWNrIGdhcmRlbiB0byBjcmVhdGUgYW4gYXR0cmFjdGl2ZSBvdXRkb29yIHNwYWNlIGZvciBndWVzdHMuIiwibWFuZGF0b3J5IjoiTiIsInNvcnQiOjJ9LHsiaXRlbV9pZCI6IkdBUi0wMyIsInNlY3Rpb24iOiJHYXJkZW4iLCJzdGFmZl9sYWJlbCI6IlByaXZhY3kgcGxhbnRpbmciLCJvd25lcl93b3JkaW5nIjoiUGxhbnQgYnVzaGVzIGFuZCB0cmVlcyB0byBnaXZlIHRoZSBwcm9wZXJ0eSBtb3JlIHByaXZhY3kuIiwibWFuZGF0b3J5IjoiTiIsInNvcnQiOjN9LHsiaXRlbV9pZCI6IkdBUi0wNCIsInNlY3Rpb24iOiJHYXJkZW4iLCJzdGFmZl9sYWJlbCI6IkZyb250IGdhcmRlbiByZWZyZXNoIiwib3duZXJfd29yZGluZyI6IlJlZnJlc2ggdGhlIGZyb250IGdhcmRlbiBiZWRzIHRvIGxpZnQgc3RyZWV0IGFwcGVhbCBhbmQgdGhlIGZpcnN0IHBob3RvIGd1ZXN0cyBzZWUuIiwibWFuZGF0b3J5IjoiTiIsInNvcnQiOjR9LHsiaXRlbV9pZCI6IkdBUi0wNSIsInNlY3Rpb24iOiJHYXJkZW4iLCJzdGFmZl9sYWJlbCI6IkNsZWFyIHRoZSB5YXJkIiwib3duZXJfd29yZGluZyI6IkNsZWFyIG92ZXJncm93biBhcmVhcywgZ2FyZGVuIHdhc3RlIGFuZCBzdG9yZWQgaXRlbXMgZnJvbSB0aGUgeWFyZC4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6NX0seyJpdGVtX2lkIjoiR0FSLTA2Iiwic2VjdGlvbiI6IkdhcmRlbiIsInN0YWZmX2xhYmVsIjoiRmlyZSBwaXQiLCJvd25lcl93b3JkaW5nIjoiSW5zdGFsbCBhIGZpcmUgcGl0LiBQcm9wZXJ0aWVzIHdpdGggZmlyZSBwaXRzIGNvbnNpc3RlbnRseSBwZXJmb3JtIGJldHRlciB0aHJvdWdoIHdpbnRlci4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6Nn0seyJpdGVtX2lkIjoiTElWLTAxIiwic2VjdGlvbiI6IkxpdmluZyBhcmVhIiwic3RhZmZfbGFiZWwiOiJMYXJnZSBzbWFydCBUViIsIm93bmVyX3dvcmRpbmciOiJJbnN0YWxsIGEgbGFyZ2Ugc21hcnQgVFYgKDc1IGluY2ggd2hlcmUgc3BhY2UgYWxsb3dzKS4iLCJtYW5kYXRvcnkiOiJZIiwic29ydCI6MX0seyJpdGVtX2lkIjoiTElWLTAyIiwic2VjdGlvbiI6IkxpdmluZyBhcmVhIiwic3RhZmZfbGFiZWwiOiJOZXcgY291Y2giLCJvd25lcl93b3JkaW5nIjoiUmVwbGFjZSB0aGUgY291Y2guIExlYXRoZXIgb3IgbGVhdGhlci1sb29rIGlzIGVhc2llc3QgdG8ga2VlcCBjbGVhbi4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6Mn0seyJpdGVtX2lkIjoiTElWLTAzIiwic2VjdGlvbiI6IkxpdmluZyBhcmVhIiwic3RhZmZfbGFiZWwiOiJTZWF0aW5nIGZvciBmdWxsIGNhcGFjaXR5Iiwib3duZXJfd29yZGluZyI6IkFkZCBzZWF0aW5nIHNvIHRoZSBmdWxsIGd1ZXN0IGNhcGFjaXR5IGNhbiBzaXQgdG9nZXRoZXIsIHN1Y2ggYXMgYXJtY2hhaXJzIG9yIG9jY2FzaW9uYWwgY2hhaXJzLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0IjozfSx7Iml0ZW1faWQiOiJMSVYtMDQiLCJzZWN0aW9uIjoiTGl2aW5nIGFyZWEiLCJzdGFmZl9sYWJlbCI6IkNvZmZlZSBhbmQgc2lkZSB0YWJsZXMiLCJvd25lcl93b3JkaW5nIjoiQWRkIGEgY29mZmVlIHRhYmxlIGFuZCBzaWRlIHRhYmxlcyBuZXh0IHRvIHRoZSBzZWF0aW5nLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0Ijo0fSx7Iml0ZW1faWQiOiJMSVYtMDUiLCJzZWN0aW9uIjoiTGl2aW5nIGFyZWEiLCJzdGFmZl9sYWJlbCI6IkRpbmluZyBmb3IgZnVsbCBjYXBhY2l0eSIsIm93bmVyX3dvcmRpbmciOiJQcm92aWRlIGEgZGluaW5nIHRhYmxlIGFuZCBjaGFpcnMgc28gZXZlcnkgZ3Vlc3QgY2FuIHNpdCBkb3duIHRvIGVhdCBhdCB0aGUgc2FtZSB0aW1lLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0Ijo1fSx7Iml0ZW1faWQiOiJMSVYtMDYiLCJzZWN0aW9uIjoiTGl2aW5nIGFyZWEiLCJzdGFmZl9sYWJlbCI6IkVuY2xvc2VkIHN0b3JhZ2UiLCJvd25lcl93b3JkaW5nIjoiQWRkIGVuY2xvc2VkIHN0b3JhZ2UgZm9yIGJvb2tzLCBtYWdhemluZXMgYW5kIGJvYXJkIGdhbWVzLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0Ijo2fSx7Iml0ZW1faWQiOiJMSVYtMDciLCJzZWN0aW9uIjoiTGl2aW5nIGFyZWEiLCJzdGFmZl9sYWJlbCI6IkxhbXBzIiwib3duZXJfd29yZGluZyI6IkFkZCBsYW1wcyBmb3IgcmVhZGluZyBhbmQgZXZlbmluZyBsaWdodGluZy4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6N30seyJpdGVtX2lkIjoiTElWLTA4Iiwic2VjdGlvbiI6IkxpdmluZyBhcmVhIiwic3RhZmZfbGFiZWwiOiJBcnR3b3JrIiwib3duZXJfd29yZGluZyI6Ikhhbmcgb25lIG9yIHR3byBnb29kLXNpemVkIGFydHdvcmtzLCBpZGVhbGx5IHJlZmxlY3RpbmcgdGhlIGxvY2FsIGFyZWEuIiwibWFuZGF0b3J5IjoiTiIsInNvcnQiOjh9LHsiaXRlbV9pZCI6IkJFRC0wMSIsInNlY3Rpb24iOiJCZWRyb29tIiwic3RhZmZfbGFiZWwiOiJEb3VibGUgdG8gcXVlZW4iLCJvd25lcl93b3JkaW5nIjoiVXBncmFkZSB0aGUgZG91YmxlIGJlZCB0byBhIHF1ZWVuIGJlZC4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6MX0seyJpdGVtX2lkIjoiQkVELTAyIiwic2VjdGlvbiI6IkJlZHJvb20iLCJzdGFmZl9sYWJlbCI6IlF1YWxpdHkgYmVkIGZyYW1lIiwib3duZXJfd29yZGluZyI6IlJlcGxhY2UgdGhlIGJlZCBmcmFtZSB3aXRoIGEgcXVhbGl0eSBmcmFtZSBzdWNoIGFzIHRpbWJlci4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6Mn0seyJpdGVtX2lkIjoiQkVELTAzIiwic2VjdGlvbiI6IkJlZHJvb20iLCJzdGFmZl9sYWJlbCI6Ik5ldyBtYXR0cmVzcyIsIm93bmVyX3dvcmRpbmciOiJSZXBsYWNlIHRoZSBtYXR0cmVzcyB3aXRoIGEgcXVhbGl0eSBtYXR0cmVzcyBvZiBtZWRpdW0gc29mdG5lc3MuIiwibWFuZGF0b3J5IjoiTiIsInNvcnQiOjN9LHsiaXRlbV9pZCI6IkJFRC0wNCIsInNlY3Rpb24iOiJCZWRyb29tIiwic3RhZmZfbGFiZWwiOiJCdW5rcyB0byBhZGQgY2FwYWNpdHkiLCJvd25lcl93b3JkaW5nIjoiQWRkIGJ1bmsgYmVkcyAoZG91YmxlIG9yIGtpbmcgc2luZ2xlLCB3aXRoIHNlY3VyZSBsYWRkZXJzKSB0byBpbmNyZWFzZSBndWVzdCBjYXBhY2l0eS4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6NH0seyJpdGVtX2lkIjoiQkVELTA1Iiwic2VjdGlvbiI6IkJlZHJvb20iLCJzdGFmZl9sYWJlbCI6IldhcmRyb2JlIiwib3duZXJfd29yZGluZyI6IkFkZCBhIHdhcmRyb2JlIHdpdGggaGFuZ2luZyBzcGFjZSBhbmQgZHJhd2Vycy4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6NX0seyJpdGVtX2lkIjoiQkVELTA2Iiwic2VjdGlvbiI6IkJlZHJvb20iLCJzdGFmZl9sYWJlbCI6IkJlZHNpZGUgdGFibGVzIGFuZCBsYW1wcyIsIm93bmVyX3dvcmRpbmciOiJBZGQgYmVkc2lkZSB0YWJsZXMgYW5kIGxhbXBzIG9uIGJvdGggc2lkZXMgb2YgdGhlIGJlZC4iLCJtYW5kYXRvcnkiOiJOIiwic29ydCI6Nn0seyJpdGVtX2lkIjoiQkVELTA3Iiwic2VjdGlvbiI6IkJlZHJvb20iLCJzdGFmZl9sYWJlbCI6IkJsb2Nrb3V0IGJsaW5kcyIsIm93bmVyX3dvcmRpbmciOiJGaXQgYmxvY2tvdXQgYmxpbmRzIG9yIGN1cnRhaW5zLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0Ijo3fSx7Iml0ZW1faWQiOiJCVEgtMDEiLCJzZWN0aW9uIjoiQmF0aHJvb20iLCJzdGFmZl9sYWJlbCI6IkNoYW5nZSB2YW5pdHkiLCJvd25lcl93b3JkaW5nIjoiUmVwbGFjZSB0aGUgdmFuaXR5LiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0IjoxfSx7Iml0ZW1faWQiOiJCVEgtMDIiLCJzZWN0aW9uIjoiQmF0aHJvb20iLCJzdGFmZl9sYWJlbCI6Ikdyb3V0IC8gc2lsaWNvbmUgLyBmaXR0aW5ncyIsIm93bmVyX3dvcmRpbmciOiJSZWZyZXNoIHdvcm4gZ3JvdXQgYW5kIHNpbGljb25lLCBhbmQgcmVwbGFjZSB0aXJlZCB0YXB3YXJlIG9yIG1pcnJvcnMuIiwibWFuZGF0b3J5IjoiTiIsInNvcnQiOjJ9LHsiaXRlbV9pZCI6IkJUSC0wMyIsInNlY3Rpb24iOiJCYXRocm9vbSIsInN0YWZmX2xhYmVsIjoiRXhoYXVzdCBmYW4iLCJvd25lcl93b3JkaW5nIjoiSW5zdGFsbCBvciByZXBsYWNlIHRoZSBleGhhdXN0IGZhbiB0byBjb250cm9sIGRhbXAgYW5kIG1vdWxkLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0IjozfSx7Iml0ZW1faWQiOiJCVEgtMDQiLCJzZWN0aW9uIjoiQmF0aHJvb20iLCJzdGFmZl9sYWJlbCI6IkJhdGhyb29tIHJlbm92YXRpb24iLCJvd25lcl93b3JkaW5nIjoiUmVub3ZhdGUgdGhlIGJhdGhyb29tLiIsIm1hbmRhdG9yeSI6Ik4iLCJzb3J0Ijo0fV0=</script>
 <script>
-const LIB = [
-{"item_id": "OVR-01", "section": "Overall property", "staff_label": "Dishwasher / washer / dryer", "owner_wording": "Install a dishwasher, washing machine and tumble dryer. A heat pump dryer is quieter and more energy efficient.", "mandatory": "Y"},
-{"item_id": "OVR-02", "section": "Overall property", "staff_label": "Air conditioning", "owner_wording": "Install air conditioning in the main living areas.", "mandatory": "Y"},
-{"item_id": "OVR-03", "section": "Overall property", "staff_label": "NBN wifi 50Mbps", "owner_wording": "Connect NBN wifi with a minimum speed of 50Mbps (no dongles), with the 2.4GHz band enabled.", "mandatory": "Y"},
-{"item_id": "OVR-04", "section": "Overall property", "staff_label": "Espresso machine", "owner_wording": "Supply an espresso machine. A Nespresso compatible pod machine is the simplest option for guests.", "mandatory": "Y"},
-{"item_id": "OVR-05", "section": "Overall property", "staff_label": "Smoke alarms / fire safety certificate", "owner_wording": "Install smoke alarms that meet AS 3786 and provide a fire safety certificate before the property goes live.", "mandatory": "Y"},
-{"item_id": "OVR-06", "section": "Overall property", "staff_label": "Kitchen fully equipped", "owner_wording": "Fully equip the kitchen with a stove, oven, microwave, 4-slice toaster and kettle, plus crockery, cutlery and glassware for twice the maximum guest capacity.", "mandatory": "Y"},
-{"item_id": "OVR-07", "section": "Overall property", "staff_label": "High chair and portacot", "owner_wording": "Supply a high chair and a portacot.", "mandatory": "Y"},
-{"item_id": "OVR-08", "section": "Overall property", "staff_label": "Furnishing standard", "owner_wording": "Furnish the property to a good standard throughout, replacing worn, budget or mismatched pieces.", "mandatory": "Y"},
-{"item_id": "OVR-09", "section": "Overall property", "staff_label": "Condition and presentation", "owner_wording": "Bring the property to excellent overall condition, with a high standard of cosmetic presentation inside and out.", "mandatory": "Y"},
-{"item_id": "OVR-10", "section": "Overall property", "staff_label": "Remove personal items", "owner_wording": "Remove personal and family photos, valuables and personal belongings.", "mandatory": "N"},
-{"item_id": "EXT-01", "section": "Exterior", "staff_label": "Keyless entry / front lock box", "owner_wording": "Install keyless entry or a combination lock box at the front door. Please avoid systems that need a new code for each guest or an app.", "mandatory": "Y"},
-{"item_id": "EXT-02", "section": "Exterior", "staff_label": "Entry sensor light", "owner_wording": "Install a sensor light at the entry door so guests arriving at night can find their way in safely.", "mandatory": "N"},
-{"item_id": "EXT-03", "section": "Exterior", "staff_label": "Outdoor lighting", "owner_wording": "Add lighting to the deck and outdoor living areas so guests can use them in the evening.", "mandatory": "N"},
-{"item_id": "EXT-04", "section": "Exterior", "staff_label": "Outdoor dining setting", "owner_wording": "Provide an outdoor dining table and chairs that seat the full guest capacity, in low-maintenance, weather-resistant materials (no cheap plastic).", "mandatory": "Y"},
-{"item_id": "EXT-05", "section": "Exterior", "staff_label": "Quality BBQ", "owner_wording": "Supply a quality BBQ sized for the guest capacity (no cheap flat plate models), with cleaning tools and two gas cylinders.", "mandatory": "Y"},
-{"item_id": "EXT-06", "section": "Exterior", "staff_label": "Outdoor lounge", "owner_wording": "Create an outdoor lounge area with comfortable seating, a daybed or sun loungers.", "mandatory": "N"},
-{"item_id": "EXT-07", "section": "Exterior", "staff_label": "Exterior refresh", "owner_wording": "Refresh the exterior presentation, for example painting, pressure cleaning and repairing visible damage.", "mandatory": "N"},
-{"item_id": "EXT-08", "section": "Exterior", "staff_label": "Garbage bins", "owner_wording": "Provide the garbage bins required for the guest capacity. Your local council can supply additional bins.", "mandatory": "Y"},
-{"item_id": "EXT-09", "section": "Exterior", "staff_label": "Hose on reel", "owner_wording": "Fit a small hose on a reel for guests to rinse dogs, cars or boats.", "mandatory": "N"},
-{"item_id": "GAR-01", "section": "Garden", "staff_label": "Regular garden care", "owner_wording": "Arrange regular garden care, including mowing, edging, leaf blowing, trimming and weeding.", "mandatory": "N"},
-{"item_id": "GAR-02", "section": "Garden", "staff_label": "Fully fenced for pets", "owner_wording": "Fully enclose the garden with no gaps in the fencing (or add a fenced dog run) so the property can be marketed as pet friendly.", "mandatory": "Y"},
-{"item_id": "GAR-03", "section": "Garden", "staff_label": "Pet supplies", "owner_wording": "Supply dog water bowls and dog toys.", "mandatory": "N"},
-{"item_id": "GAR-04", "section": "Garden", "staff_label": "Fire pit", "owner_wording": "Install a fire pit. Properties with fire pits consistently perform better through winter.", "mandatory": "N"},
-{"item_id": "GAR-05", "section": "Garden", "staff_label": "Clear the yard", "owner_wording": "Clear overgrown areas, garden waste and stored items from the yard.", "mandatory": "N"},
-{"item_id": "GAR-06", "section": "Garden", "staff_label": "Street appeal planting", "owner_wording": "Refresh the front garden beds to lift street appeal and the first photo guests see.", "mandatory": "N"},
-{"item_id": "LIV-01", "section": "Living area", "staff_label": "Seating for full capacity", "owner_wording": "Provide enough seating for the full guest capacity, using a mix of couches, armchairs and occasional seating.", "mandatory": "N"},
-{"item_id": "LIV-02", "section": "Living area", "staff_label": "Easy-clean couches", "owner_wording": "Choose leather or leather-look couches, or have fabric couches stain protected, to make cleaning easier.", "mandatory": "N"},
-{"item_id": "LIV-03", "section": "Living area", "staff_label": "Large smart TV", "owner_wording": "Install a large smart TV (75 inch where space allows), or add a Google TV device to an existing TV.", "mandatory": "Y"},
-{"item_id": "LIV-04", "section": "Living area", "staff_label": "Bluetooth speaker", "owner_wording": "Supply a portable Bluetooth speaker.", "mandatory": "Y"},
-{"item_id": "LIV-05", "section": "Living area", "staff_label": "Coffee and side tables", "owner_wording": "Add coffee and side tables near the seating, with protectors on the feet.", "mandatory": "N"},
-{"item_id": "LIV-06", "section": "Living area", "staff_label": "Enclosed storage", "owner_wording": "Add enclosed storage for books, magazines and board games.", "mandatory": "N"},
-{"item_id": "LIV-07", "section": "Living area", "staff_label": "Artwork", "owner_wording": "Hang one or two good-sized artworks, ideally reflecting the local area.", "mandatory": "N"},
-{"item_id": "LIV-08", "section": "Living area", "staff_label": "Lamps", "owner_wording": "Add lamps for reading and evening lighting. Dimmer switches also help create atmosphere.", "mandatory": "N"},
-{"item_id": "LIV-09", "section": "Living area", "staff_label": "Declutter ornaments", "owner_wording": "Reduce ornaments to a few pieces that reflect the local area.", "mandatory": "N"},
-{"item_id": "LIV-10", "section": "Living area", "staff_label": "Dining for full capacity", "owner_wording": "Provide a dining table and chairs so every guest can sit down to eat at the same time.", "mandatory": "N"},
-{"item_id": "BED-01", "section": "Bedroom", "staff_label": "Double to queen", "owner_wording": "Upgrade the double bed to a queen bed.", "mandatory": "N"},
-{"item_id": "BED-02", "section": "Bedroom", "staff_label": "Quality bed frame", "owner_wording": "Replace metal-framed or budget beds with quality beds such as timber frames.", "mandatory": "N"},
-{"item_id": "BED-03", "section": "Bedroom", "staff_label": "Mattress", "owner_wording": "Replace the mattress with a quality mattress of medium softness.", "mandatory": "N"},
-{"item_id": "BED-04", "section": "Bedroom", "staff_label": "Bunks to add capacity", "owner_wording": "Add bunk beds (double or king single, with secure ladders) to increase guest capacity.", "mandatory": "N"},
-{"item_id": "BED-05", "section": "Bedroom", "staff_label": "Bedside tables and lamps", "owner_wording": "Add bedside tables and lamps on both sides of the bed, with tables higher than the top of the mattress.", "mandatory": "N"},
-{"item_id": "BED-06", "section": "Bedroom", "staff_label": "Wardrobe and hangers", "owner_wording": "Provide hanging space with at least six wooden coat hangers and drawer storage.", "mandatory": "N"},
-{"item_id": "BED-07", "section": "Bedroom", "staff_label": "Blackout blinds", "owner_wording": "Fit blackout blinds or curtains.", "mandatory": "Y"},
-{"item_id": "BED-08", "section": "Bedroom", "staff_label": "Fan and heater", "owner_wording": "Provide a fan and a heater, as the room has no air conditioning. Oil column heaters are a safe, low-cost option.", "mandatory": "Y"},
-{"item_id": "BED-09", "section": "Bedroom", "staff_label": "Pillows and doonas", "owner_wording": "Supply a doona for each bed plus a spare per bed size, and two pillows per single bed and four per queen bed.", "mandatory": "Y"},
-{"item_id": "BED-10", "section": "Bedroom", "staff_label": "Power and charging", "owner_wording": "Add a labelled power board or USB charging point near the bed.", "mandatory": "N"},
-{"item_id": "BTH-01", "section": "Bathroom", "staff_label": "Toiletries", "owner_wording": "Supply shampoo, conditioner, shower gel and hand soap in a pump dispenser.", "mandatory": "Y"},
-{"item_id": "BTH-02", "section": "Bathroom", "staff_label": "Shower caddy", "owner_wording": "Add a shower caddy or shelf for toiletries.", "mandatory": "N"},
-{"item_id": "BTH-03", "section": "Bathroom", "staff_label": "Vanity storage", "owner_wording": "Add storage or shelving so guests have space for their toiletries.", "mandatory": "N"},
-{"item_id": "BTH-04", "section": "Bathroom", "staff_label": "Hair dryer", "owner_wording": "Supply a hair dryer.", "mandatory": "N"},
-{"item_id": "BTH-05", "section": "Bathroom", "staff_label": "Toilet roll holder and brush", "owner_wording": "Fit a toilet roll holder in an obvious spot and supply a toilet brush.", "mandatory": "N"},
-{"item_id": "BTH-06", "section": "Bathroom", "staff_label": "Air freshener", "owner_wording": "Supply an air freshener block and spray.", "mandatory": "N"},
-{"item_id": "BTH-07", "section": "Bathroom", "staff_label": "Grout / silicone / fittings", "owner_wording": "Refresh worn grout, silicone, tapware or mirrors.", "mandatory": "N"},
-{"item_id": "BTH-08", "section": "Bathroom", "staff_label": "Exhaust fan", "owner_wording": "Install or repair the exhaust fan to control damp and mould.", "mandatory": "N"},
-{"item_id": "OTH-01", "section": "Other comments", "staff_label": "Laundry equipment", "owner_wording": "Equip the laundry with an iron and ironing board, vacuum, mop, bucket, broom and clothes airer.", "mandatory": "N"},
-{"item_id": "OTH-02", "section": "Other comments", "staff_label": "Hot water size", "owner_wording": "Upgrade the hot water system to the minimum size for the guest capacity. A heat pump system is recommended.", "mandatory": "Y"},
-{"item_id": "OTH-03", "section": "Other comments", "staff_label": "Short-term rental insurance", "owner_wording": "Hold short-term rental insurance covering public liability, accidental damage, malicious damage and loss of rent.", "mandatory": "Y"},
-{"item_id": "OTH-04", "section": "Other comments", "staff_label": "CO detector (gas heating)", "owner_wording": "Install a carbon monoxide detector if the property uses gas heating.", "mandatory": "Y"},
-{"item_id": "OTH-05", "section": "Other comments", "staff_label": "Winter readiness", "owner_wording": "From 1 May, supply firewood, firelighters and fire tools if there is a fireplace or fire pit, plus extra blankets for every bed.", "mandatory": "N"},
-{"item_id": "OTH-06", "section": "Other comments", "staff_label": "Family extras", "owner_wording": "Add family extras such as board games, toys, a games console or beach gear.", "mandatory": "N"}
-];
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+var LIB = [];
+try { LIB = JSON.parse(decodeURIComponent(escape(atob(document.getElementById('__lib').textContent.trim())))); } catch (e) { LIB = []; }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 function sectionList() {
-  const n = id => +document.getElementById(id).value;
-  const out = [["Overall property","Overall property"],["Exterior","Exterior"],["Garden","Garden"]];
-  for (let i=1;i<=n('nLiv');i++) out.push(["Living area "+i,"Living area"]);
-  for (let i=1;i<=n('nBed');i++) out.push(["Bedroom "+i,"Bedroom"]);
-  for (let i=1;i<=n('nBth');i++) out.push(["Bathroom "+i,"Bathroom"]);
+  function n(id) { return +document.getElementById(id).value; }
+  var out = [["Overall property","Overall property"],["Exterior","Exterior"],["Garden","Garden"]];
+  for (var i=1;i<=n('nLiv');i++) out.push(["Living area "+i,"Living area"]);
+  for (var b=1;b<=n('nBed');b++) out.push(["Bedroom "+b,"Bedroom"]);
+  for (var t=1;t<=n('nBth');t++) out.push(["Bathroom "+t,"Bathroom"]);
   out.push(["Other comments","Other comments"]); return out;
 }
-const state = {"Overall property":{ticks:{"OVR-01":true,"OVR-04":true,"OVR-05":true},comment:""},"Bedroom 2":{ticks:{"BED-01":true,"BED-07":true},comment:""}};
+var state = {};
 function render() {
-  const host = document.getElementById('sections'); host.innerHTML = '';
-  sectionList().forEach(([name, type]) => {
-    const st = state[name] || (state[name] = {ticks:{}, comment:''});
-    const d = document.createElement('details'); d.className='sec'; d.dataset.name = name; if (name==='Overall property') d.open = true;
+  var host = document.getElementById('sections'); host.innerHTML = '';
+  sectionList().forEach(function (pair) {
+    var name = pair[0], type = pair[1];
+    var st = state[name] || (state[name] = {ticks:{}, comment:''});
+    var d = document.createElement('details'); d.className='sec'; d.dataset.name = name;
     d.innerHTML = '<summary><span>'+esc(name)+'</span><span class="count"></span></summary><div class="items">' +
-      LIB.filter(x => x.section === type).map(it => '<label class="item"><input type="checkbox" data-id="'+it.item_id+'"'+(st.ticks[it.item_id]?' checked':'')+'><span><span class="lab">'+esc(it.staff_label)+'</span>'+(it.mandatory==='Y'?'<span class="mand">Mandatory</span>':'')+'<br><span class="ow">'+esc(it.owner_wording)+'</span></span></label>').join('') +
+      LIB.filter(function (x) { return x.section === type; }).map(function (it) { return '<label class="item"><input type="checkbox" data-id="'+esc(it.item_id)+'"'+(st.ticks[it.item_id]?' checked':'')+'><span><span class="lab">'+esc(it.staff_label)+'</span>'+(it.mandatory==='Y'?'<span class="mand">Mandatory</span>':'')+'<br><span class="ow">'+esc(it.owner_wording)+'</span></span></label>'; }).join('') +
       '<div style="margin-top:8px"><span class="k">Comment for owner (optional)</span><textarea placeholder="Shown under this area in the owner plan">'+esc(st.comment)+'</textarea></div></div>';
-    d.querySelectorAll('input[type=checkbox]').forEach(cb => cb.onchange = () => { st.ticks[cb.dataset.id] = cb.checked; tally(); });
-    d.querySelector('textarea').oninput = e => { st.comment = e.target.value; tally(); };
+    d.querySelectorAll('input[type=checkbox]').forEach(function (cb) { cb.onchange = function () { st.ticks[cb.dataset.id] = cb.checked; tally(); }; });
+    d.querySelector('textarea').oninput = function (e) { st.comment = e.target.value; tally(); };
     host.appendChild(d);
   }); tally();
 }
+function collect() {
+  return sectionList().map(function (pair) {
+    var st = state[pair[0]] || {ticks:{}, comment:''};
+    return { name: pair[0], type: pair[1], item_ids: Object.keys(st.ticks).filter(function (k) { return st.ticks[k]; }), comment: (st.comment || '').trim() };
+  }).filter(function (s) { return s.item_ids.length || s.comment; });
+}
 function tally() {
-  let t=0, s=0;
-  document.querySelectorAll('details.sec').forEach(d => {
-    const st = state[d.dataset.name], c = Object.values(st.ticks).filter(Boolean).length, has = c || st.comment.trim();
-    const el = d.querySelector('.count'); el.textContent = c+' ticked'+(st.comment.trim()?' + note':''); el.classList.toggle('zero', !has);
-    t+=c; if (has) s++;
+  var secs = collect(), t = 0;
+  secs.forEach(function (s) { t += s.item_ids.length; });
+  document.querySelectorAll('details.sec').forEach(function (d) {
+    var st = state[d.dataset.name], c = Object.keys(st.ticks).filter(function (k) { return st.ticks[k]; }).length, has = c || st.comment.trim();
+    var el = d.querySelector('.count'); el.textContent = c+' ticked'+(st.comment.trim()?' + note':''); el.classList.toggle('zero', !has);
   });
   document.getElementById('tot').textContent = t+(t===1?' item':' items');
-  document.getElementById('totS').textContent = 'in '+s+(s===1?' area':' areas');
+  document.getElementById('totS').textContent = 'in '+secs.length+(secs.length===1?' area':' areas');
   if (document.getElementById('preview').style.display==='block') preview();
 }
 function preview() {
-  let h='';
-  sectionList().forEach(([name]) => { const st=state[name]; if(!st) return; const its=LIB.filter(x=>st.ticks[x.item_id]);
-    if(!its.length && !st.comment.trim()) return;
-    h+='<p style="margin:10px 0 0;font-weight:700;color:var(--ink)">'+esc(name)+'</p><ol>'+its.map(i=>'<li>'+esc(i.owner_wording)+'</li>').join('')+'</ol>'+(st.comment.trim()?'<p class="note">'+esc(st.comment)+'</p>':''); });
+  var byId = {}; LIB.forEach(function (x) { byId[x.item_id] = x; });
+  var h = collect().map(function (s) {
+    return '<p style="margin:10px 0 0;font-weight:700;color:var(--ink)">'+esc(s.name)+'</p><ol>'+s.item_ids.map(function (id) { return '<li>'+esc((byId[id]||{}).owner_wording)+'</li>'; }).join('')+'</ol>'+(s.comment?'<p class="note">'+esc(s.comment)+'</p>':'');
+  }).join('');
   document.getElementById('pv').innerHTML = h || '<p class="note">Nothing ticked yet. An empty plan cannot be generated.</p>';
 }
-['nLiv','nBed','nBth'].forEach(id => document.getElementById(id).onchange = render);
-document.getElementById('pvBtn').onclick = () => { const p=document.getElementById('preview'); p.style.display = p.style.display==='block'?'none':'block'; preview(); };
+function showResult(ok, html) { var r = document.getElementById('result'); r.style.display='block'; r.className = 'card ' + (ok ? 'ok' : 'bad'); r.innerHTML = html; r.scrollIntoView({behavior:'smooth'}); }
+function generate() {
+  var addr = document.getElementById('addr').value.trim(), prep = document.getElementById('prep').value, secs = collect();
+  if (!addr || !prep) { showResult(false, 'Add the property address and your name first.'); return; }
+  if (!secs.length) { showResult(false, 'Nothing is ticked. Tick at least one item or add a comment.'); return; }
+  var btn = document.getElementById('genBtn'); btn.disabled = true; btn.textContent = 'Generating...';
+  var url = location.pathname.replace(/pip-checklist\/?$/, 'pip-generate');
+  fetch(url, { method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ property_address: addr, owner_name: document.getElementById('owner').value.trim(), owner_email: document.getElementById('oemail').value.trim(), appraisal_type: document.getElementById('atype').value, prepared_by: prep, sections: secs }) })
+  .then(function (r) { return r.json().catch(function () { return { ok:false, error:'Unexpected response (' + r.status + ')' }; }); })
+  .then(function (j) {
+    if (j && j.ok) showResult(true, '<span class="k">Draft ready</span><p style="margin:0 0 6px">' + esc(j.item_count) + ' recommendations across ' + esc(j.area_count) + ' areas. Saved to Drive. Nothing has been sent.</p><a href="' + esc(j.pdf_url) + '" target="_blank" rel="noopener">Open the PDF</a>');
+    else showResult(false, esc((j && j.error) || 'Something went wrong. Nothing was saved.'));
+  })
+  .catch(function () { showResult(false, 'Could not reach the generator. Check your connection and try again.'); })
+  .then(function () { btn.disabled = false; btn.textContent = 'Generate draft PDF'; });
+}
+var acTimer = null, acSeq = 0;
+function acHide() { document.getElementById('acList').style.display = 'none'; }
+function acSearch() {
+  var q = document.getElementById('owner').value.trim(), hint = document.getElementById('acHint');
+  if (q.length < 3) { acHide(); hint.textContent = ''; return; }
+  var seq = ++acSeq; hint.textContent = 'Searching ActiveCampaign...';
+  (function () { return Promise.reject(new Error('sample')); })(location.pathname.replace(/pip-checklist\/?$/, 'pip-lookup') + '?q=' + encodeURIComponent(q), { credentials:'same-origin' })
+  .then(function (r) { return r.json(); })
+  .then(function (j) {
+    if (seq !== acSeq) return;
+    var list = (j && j.contacts) || [], box = document.getElementById('acList');
+    hint.textContent = list.length ? '' : 'No match in ActiveCampaign. Type the details in.';
+    box.innerHTML = list.map(function (c, i) { return '<button type="button" data-i="' + i + '">' + esc(c.name || c.email) + '<small>' + esc(c.email) + (c.phone ? ' | ' + esc(c.phone) : '') + '</small></button>'; }).join('');
+    box.style.display = list.length ? 'block' : 'none';
+    box.querySelectorAll('button').forEach(function (b) { b.onclick = function () { var c = list[+b.dataset.i]; document.getElementById('owner').value = c.name || ''; document.getElementById('oemail').value = c.email || ''; acHide(); hint.textContent = 'Filled from ActiveCampaign.'; }; });
+  })
+  .catch(function () { if (seq === acSeq) hint.textContent = 'Lookup unavailable. Type the details in.'; });
+}
+document.getElementById('owner').addEventListener('input', function () { clearTimeout(acTimer); acTimer = setTimeout(acSearch, 350); });
+document.addEventListener('click', function (e) { if (!e.target.closest('.lookup')) acHide(); });
+['nLiv','nBed','nBth'].forEach(function (id) { document.getElementById(id).onchange = render; });
+document.getElementById('pvBtn').onclick = function () { var p=document.getElementById('preview'); p.style.display = p.style.display==='block'?'none':'block'; preview(); };
+document.getElementById('genBtn').onclick = function () { showResult(false, 'This is a static sample. The working version runs in n8n.'); };
+if (!LIB.length) showResult(false, 'The recommendation library could not be loaded. Check the library Sheet.');
 render();
 </script></body></html>
