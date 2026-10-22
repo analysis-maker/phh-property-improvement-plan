@@ -1,40 +1,38 @@
 item_id,section,applies_to,staff_label,owner_wording,source,source_status,mandatory,active,sort,craig_notes
-OVR-01,Overall property,Overall property,Dishwasher,Install a dishwasher.,Appraisal contingency + Owner Intranet Mandatory Amenities; split per Craig 20 Oct,Documented,Y,Y,1,
-OVR-02,Overall property,Overall property,Washing machine,Install a washing machine.,Appraisal contingency + Owner Intranet Mandatory Amenities; split per Craig 20 Oct,Documented,Y,Y,2,
-OVR-03,Overall property,Overall property,Tumble dryer,Install a tumble dryer. A heat pump dryer is quieter and more energy efficient.,Appraisal contingency + Owner Intranet Mandatory Amenities; split per Craig 20 Oct,Documented,Y,Y,3,
-OVR-04,Overall property,Overall property,Espresso machine,Supply an espresso machine. A Nespresso compatible pod machine is the simplest option for guests.,Owner Intranet Mandatory Amenities,Documented,Y,Y,4,
-OVR-05,Overall property,Overall property,Kitchen fully equipped,"Fully equip the kitchen with a stove, oven, microwave, 4-slice toaster and kettle, plus crockery, cutlery and glassware for twice the maximum guest capacity.",Owner Intranet Kitchen,Documented,Y,Y,5,
-OVR-06,Overall property,Overall property,Air conditioning,Install air conditioning in the main living areas.,Appraisal contingency,Documented,Y,Y,6,
-OVR-07,Overall property,Overall property,NBN wifi 50Mbps,"Connect NBN wifi with a minimum speed of 50Mbps (no dongles), with the 2.4GHz band enabled.",Appraisal contingency + Owner Intranet Mandatory Amenities,Documented,Y,Y,7,
-OVR-08,Overall property,Overall property,Smoke alarms / fire safety,"Install smoke alarms that meet AS 3786 and provide a fire safety certificate before the property goes live, plus a carbon monoxide detector if the property has gas heating.",Owner Intranet Fire Safety (source says CO2 detector; carbon monoxide assumed),Documented,Y,Y,8,Confirm carbon monoxide wording.
-OVR-09,Overall property,Overall property,Hot water system,Upgrade the hot water system to the minimum size for the guest capacity. A heat pump system is recommended.,Owner Intranet Hot Water,Documented,Y,Y,9,
-OVR-10,Overall property,Overall property,Furnishing standard,"Furnish the property to a good standard throughout, replacing worn, budget or mismatched pieces.",Appraisal contingency,Documented,Y,Y,10,
-OVR-11,Overall property,Overall property,Condition and presentation,"Bring the property to excellent overall condition, with a high standard of cosmetic presentation inside and out.",Appraisal contingency,Documented,Y,Y,11,
-OVR-12,Overall property,Overall property,Indoor fireplace,Install an indoor fireplace. Properties with fireplaces typically see more bookings in the colder months.,Owner Intranet Winter Preparation; added by Claude for Bianca to confirm,Unverified,N,Y,12,Not from Craig. Keep or cut?
-EXT-01,Exterior,Exterior,Outdoor dining setting,"Provide an outdoor dining table and chairs that seat the full guest capacity, in low-maintenance, weather-resistant materials.",Owner Intranet Mandatory Amenities + Decks,Documented,Y,Y,1,
-EXT-02,Exterior,Exterior,Quality BBQ,"Install a quality BBQ sized for the guest capacity, suited to coastal conditions.",Owner Intranet Mandatory Amenities + Decks; Craig 20 Oct keep,Documented,Y,Y,2,
-EXT-03,Exterior,Exterior,Install a spa,Install an outdoor spa. A spa is one of the strongest drawcards for holiday guests.,Craig 20 Oct 1:46:34,Documented,N,Y,3,Craig said this while on Bathroom. Outdoor spa assumed.
-EXT-04,Exterior,Exterior,Cover the deck / add a pergola,Cover the deck or add a pergola so guests can use the outdoor area in all weather.,Craig 20 Oct 1:46:42,Documented,N,Y,4,
-EXT-05,Exterior,Exterior,Outdoor lounge,"Create an outdoor lounge area with comfortable seating, a daybed or sun loungers.",Owner Intranet Decks; Craig 20 Oct keep,Documented,N,Y,5,
-EXT-06,Exterior,Exterior,Outdoor lighting,Add lighting to the deck and outdoor living areas so guests can use them in the evening.,Owner Intranet Decks; Craig 20 Oct keep,Documented,N,Y,6,
-EXT-07,Exterior,Exterior,Entry sensor light,Install a sensor light at the entry door so guests arriving at night can find their way in safely.,Owner Intranet Keys; Craig 20 Oct keep,Documented,N,Y,7,
-EXT-08,Exterior,Exterior,Keyless entry,Install keyless entry at the front door. Please avoid systems that need a new code for each guest or an app.,Owner Intranet Keys; Craig 20 Oct keep,Documented,N,Y,8,
+OVR-06,Overall property,Overall property,Air conditioning,Install air conditioning in the main living areas.,Appraisal contingency,Documented,Y,Y,1,
+OVR-07,Overall property,Overall property,NBN wifi 50Mbps,"Connect NBN wifi with a minimum speed of 50Mbps (no dongles), with the 2.4GHz band enabled.",Appraisal contingency + Owner Intranet Mandatory Amenities,Documented,Y,Y,2,
+OVR-08,Overall property,Overall property,Smoke alarms / fire safety,"Install smoke alarms that meet AS 3786 and provide a fire safety certificate before the property goes live, plus a carbon monoxide detector if the property has gas heating.",Owner Intranet Fire Safety (source says CO2 detector; carbon monoxide assumed),Documented,Y,Y,3,Confirm carbon monoxide wording.
+OVR-09,Overall property,Overall property,Hot water system,Upgrade the hot water system to the minimum size for the guest capacity. A heat pump system is recommended.,Owner Intranet Hot Water,Documented,Y,Y,4,
+OVR-10,Overall property,Overall property,Furnishing standard,"Furnish the property to a good standard throughout, replacing worn, budget or mismatched pieces.",Appraisal contingency,Documented,Y,Y,5,
+OVR-11,Overall property,Overall property,Condition and presentation,"Bring the property to excellent overall condition, with a high standard of cosmetic presentation inside and out.",Appraisal contingency,Documented,Y,Y,6,
+EXT-07,Exterior,Exterior,Entry sensor light,Install a sensor light at the entry door so guests arriving at night can find their way in safely.,Owner Intranet Keys; Craig 20 Oct keep; moved to top per Craig 22 Oct Trello,Documented,N,Y,1,
+EXT-08,Exterior,Exterior,Keyless entry,Install keyless entry at the front door. Please avoid systems that need a new code for each guest or an app.,Owner Intranet Keys; Craig 20 Oct keep; moved to top per Craig 22 Oct Trello,Documented,N,Y,2,
+EXT-01,Exterior,Exterior,Outdoor dining setting,"Provide an outdoor dining table and chairs that seat the full guest capacity, in low-maintenance, weather-resistant materials.",Owner Intranet Mandatory Amenities + Decks,Documented,Y,Y,3,
+EXT-02,Exterior,Exterior,Quality BBQ,"Install a quality BBQ sized for the guest capacity, suited to coastal conditions.",Owner Intranet Mandatory Amenities + Decks; Craig 20 Oct keep,Documented,Y,Y,4,
+EXT-03,Exterior,Exterior,Install a spa,Install an outdoor spa. A spa is one of the strongest drawcards for holiday guests.,Craig 20 Oct 1:46:34,Documented,N,Y,5,Craig said this while on Bathroom. Outdoor spa assumed.
+EXT-04,Exterior,Exterior,Cover the deck / add a pergola,Cover the deck or add a pergola so guests can use the outdoor area in all weather.,Craig 20 Oct 1:46:42,Documented,N,Y,6,
+EXT-05,Exterior,Exterior,Outdoor lounge,"Create an outdoor lounge area with comfortable seating, a daybed or sun loungers.",Owner Intranet Decks; Craig 20 Oct keep,Documented,N,Y,7,
+EXT-06,Exterior,Exterior,Outdoor lighting,Add lighting to the deck and outdoor living areas so guests can use them in the evening.,Owner Intranet Decks; Craig 20 Oct keep,Documented,N,Y,8,
 EXT-09,Exterior,Exterior,Exterior refresh,"Refresh the exterior, for example painting, pressure cleaning and repairing visible damage.",Appraisal contingency (external appeal),Unverified,N,Y,9,
 EXT-10,Exterior,Exterior,Hose on reel,"Fit a hose on a reel for guests to rinse dogs, cars or boats.",Owner Intranet Decks; Craig 20 Oct transcript garbled,Unverified,N,Y,10,Craig seemed OK with this. Confirm.
-GAR-01,Garden,Garden,Fully fenced for pets,Fully enclose the garden with no gaps in the fencing (or add a fenced dog run) so the property can be marketed as pet friendly.,Appraisal contingency (pet friendly) + Owner Intranet Pets,Documented,Y,Y,1,
+GAR-01,Garden,Garden,Secure area for pets,"Secure an area for pets so the property can be marketed as pet friendly. It does not need to be fully fenced, for example a fenced rear yard or a secure dog run.",Appraisal contingency (pet friendly) + Owner Intranet Pets; reworded per Craig 22 Oct Trello,Documented,Y,Y,1,
 GAR-02,Garden,Garden,Landscape the back garden,Landscape the back garden to create an attractive outdoor space for guests.,Craig 20 Oct 1:48:32,Documented,N,Y,2,
 GAR-03,Garden,Garden,Privacy planting,Plant bushes and trees to give the property more privacy.,Craig 20 Oct 1:48:41,Documented,N,Y,3,
 GAR-04,Garden,Garden,Front garden refresh,Refresh the front garden beds to lift street appeal and the first photo guests see.,Wording drafted,Unverified,N,Y,4,
 GAR-05,Garden,Garden,Clear the yard,"Clear overgrown areas, garden waste and stored items from the yard.",Wording drafted,Unverified,N,Y,5,
 GAR-06,Garden,Garden,Fire pit,Install a fire pit. Properties with fire pits consistently perform better through winter.,Owner Intranet Winter Preparation,Documented,N,Y,6,
-LIV-01,Living area,Living area 1-3,Large smart TV,"Install a large smart TV (75 inch where space allows).",Owner Intranet Mandatory Amenities + Living Areas,Documented,Y,Y,1,
-LIV-02,Living area,Living area 1-3,New couch,"Replace the couch. Leather or leather-look is easiest to keep clean.",Craig 20 Oct 1:47:31 + Owner Intranet Living Areas,Documented,N,Y,2,
+LIV-01,Living area,Living area 1-3,Large smart TV,Install a large smart TV (75 inch where space allows).,Owner Intranet Mandatory Amenities + Living Areas,Documented,Y,Y,1,
+LIV-02,Living area,Living area 1-3,New couch,Replace the couch. Leather or leather-look is easiest to keep clean.,Craig 20 Oct 1:47:31 + Owner Intranet Living Areas,Documented,N,Y,2,
 LIV-03,Living area,Living area 1-3,Seating for full capacity,"Add seating so the full guest capacity can sit together, such as armchairs or occasional chairs.",Owner Intranet Living Areas,Documented,N,Y,3,
 LIV-04,Living area,Living area 1-3,Coffee and side tables,Add a coffee table and side tables next to the seating.,Craig 20 Oct 1:47:51 + Owner Intranet Living Areas,Documented,N,Y,4,
 LIV-05,Living area,Living area 1-3,Dining for full capacity,Provide a dining table and chairs so every guest can sit down to eat at the same time.,Owner Intranet Dining Room,Documented,N,Y,5,
 LIV-06,Living area,Living area 1-3,Enclosed storage,"Add enclosed storage for books, magazines and board games.",Owner Intranet Living Areas,Documented,N,Y,6,
 LIV-07,Living area,Living area 1-3,Lamps,Add lamps for reading and evening lighting.,Owner Intranet Living Areas,Documented,N,Y,7,
 LIV-08,Living area,Living area 1-3,Artwork,"Hang one or two good-sized artworks, ideally reflecting the local area.",Owner Intranet Living Areas,Documented,N,Y,8,
+LIV-09,Living area,Living area 1-3,Indoor fireplace,Install an indoor fireplace. Properties with fireplaces typically see more bookings in the colder months.,Owner Intranet Winter Preparation; moved to living areas per Craig 22 Oct Trello,Documented,N,Y,9,
+KIT-01,Kitchen,Kitchen,Dishwasher,Install a dishwasher.,Appraisal contingency + Owner Intranet Mandatory Amenities; split per Craig 20 Oct; moved to Kitchen per Craig 22 Oct Trello,Documented,Y,Y,1,
+KIT-02,Kitchen,Kitchen,Espresso machine,Supply an espresso machine. A Nespresso compatible pod machine is the simplest option for guests.,Owner Intranet Mandatory Amenities; moved to Kitchen per Craig 22 Oct Trello,Documented,Y,Y,2,
+KIT-03,Kitchen,Kitchen,Kitchen fully equipped,"Fully equip the kitchen with a stove, oven, microwave, 4-slice toaster and kettle, plus crockery, cutlery and glassware for twice the maximum guest capacity.",Owner Intranet Kitchen; moved to Kitchen with dishwasher and espresso (Claude),Documented,Y,Y,3,Moved with dishwasher and espresso. Confirm.
 BED-01,Bedroom,Bedroom 1-6,Double to queen,Upgrade the double bed to a queen bed.,Owner Intranet Bedrooms,Documented,N,Y,1,
 BED-02,Bedroom,Bedroom 1-6,Quality bed frame,Replace the bed frame with a quality frame such as timber.,Owner Intranet Bedrooms; Craig 20 Oct keep,Documented,N,Y,2,
 BED-03,Bedroom,Bedroom 1-6,New mattress,Replace the mattress with a quality mattress of medium softness.,Owner Intranet Bedrooms,Documented,N,Y,3,
@@ -42,7 +40,13 @@ BED-04,Bedroom,Bedroom 1-6,Bunks to add capacity,"Add bunk beds (double or king 
 BED-05,Bedroom,Bedroom 1-6,Wardrobe,Add a wardrobe with hanging space and drawers.,Craig 20 Oct 1:51:52 + Owner Intranet Bedrooms,Documented,N,Y,5,
 BED-06,Bedroom,Bedroom 1-6,Bedside tables and lamps,Add bedside tables and lamps on both sides of the bed.,Craig 20 Oct 1:51:59 + Owner Intranet Bedrooms,Documented,N,Y,6,
 BED-07,Bedroom,Bedroom 1-6,Blockout blinds,Fit blockout blinds or curtains.,Owner Intranet; not mandatory per Craig 20 Oct,Documented,N,Y,7,
+BED-08,Bedroom,Bedroom 1-6,Artwork,Hang artwork above the bed or on a feature wall.,Craig 22 Oct Trello,Documented,N,Y,8,Owner wording drafted. Confirm.
 BTH-01,Bathroom,Bathroom 1-3,Change vanity,Replace the vanity.,Craig 20 Oct 1:46:01,Documented,N,Y,1,
-BTH-02,Bathroom,Bathroom 1-3,Grout / silicone / fittings,"Refresh worn grout and silicone, and replace tired tapware or mirrors.",Wording drafted,Unverified,N,Y,2,
-BTH-03,Bathroom,Bathroom 1-3,Exhaust fan,Install or replace the exhaust fan to control damp and mould.,Wording drafted,Unverified,N,Y,3,
-BTH-04,Bathroom,Bathroom 1-3,Bathroom renovation,Renovate the bathroom.,Added by Claude for Bianca to confirm,Unverified,N,Y,4,Not from Craig. Keep or cut?
+BTH-05,Bathroom,Bathroom 1-3,Repaint tiles,"Repaint the tiles for a fresh, modern finish.",Craig 22 Oct Trello,Documented,N,Y,2,Owner wording drafted. Confirm.
+BTH-06,Bathroom,Bathroom 1-3,Replace shower,Replace the shower.,Craig 22 Oct Trello,Documented,N,Y,3,Owner wording drafted. Confirm.
+BTH-07,Bathroom,Bathroom 1-3,Replace bath,Replace the bath.,Craig 22 Oct Trello,Documented,N,Y,4,Owner wording drafted. Confirm.
+BTH-02,Bathroom,Bathroom 1-3,Grout / silicone / fittings,"Refresh worn grout and silicone, and replace tired tapware or mirrors.",Wording drafted,Unverified,N,Y,5,
+BTH-03,Bathroom,Bathroom 1-3,Exhaust fan,Install or replace the exhaust fan to control damp and mould.,Wording drafted,Unverified,N,Y,6,
+BTH-04,Bathroom,Bathroom 1-3,Bathroom renovation,Renovate the bathroom.,Added by Claude for Bianca to confirm,Unverified,N,Y,7,Not from Craig. Keep or cut?
+LAU-01,Laundry,Laundry,Washing machine,Install a washing machine.,Appraisal contingency + Owner Intranet Mandatory Amenities; split per Craig 20 Oct; moved to Laundry per Craig 22 Oct Trello,Documented,Y,Y,1,
+LAU-02,Laundry,Laundry,Tumble dryer,Install a tumble dryer. A heat pump dryer is quieter and more energy efficient.,Appraisal contingency + Owner Intranet Mandatory Amenities; split per Craig 20 Oct; moved to Laundry per Craig 22 Oct Trello,Documented,Y,Y,2,
