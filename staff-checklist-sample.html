@@ -56,6 +56,13 @@ main.wrap { padding-bottom:180px; }
 .addph { display:inline-flex; align-items:center; gap:6px; font:700 14px Raleway,sans-serif; color:var(--accent); background:#fff; border:1px dashed var(--accent); border-radius:10px; padding:9px 14px; cursor:pointer; }
 .addph input { display:none; }
 .phnote { margin-left:8px; }
+.drow { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:9px 0; border-top:1px solid var(--rule); }
+.drow:first-child { border-top:0; }
+.drow b { color:var(--ink); }
+.drow .acts { display:flex; gap:6px; flex:none; align-items:center; }
+.drow button, #newBtn { padding:6px 11px; font-size:13px; border-radius:8px; }
+.drow.cur b:after { content:" (open)"; color:var(--accent); font-weight:600; font-size:12px; }
+#saveState { font-weight:600; }
 .hint { font-size:12px; color:var(--grey); margin-top:4px; min-height:16px; }
 </style></head><body>
 <header><div class="wrap"><img src="https://analysis-maker.github.io/phh-property-improvement-plan/phh-logo.png" alt="Professional Holiday Homes"><span class="pill">Staff only</span></div></header>
@@ -63,6 +70,7 @@ main.wrap { padding-bottom:180px; }
 <h1>Property Improvement Plan</h1>
 <p class="lead">Tick the improvements this property needs. Only ticked items and areas with content go to the owner. Owner wording is shown under each item.</p>
 <div class="res-bar"><img src="https://analysis-maker.github.io/phh-property-improvement-plan/setup-checklist-thumb.png" alt=""><div><span class="k" style="margin:0">Reference</span>Ultimate Holiday Home Setup Checklist: <a href="https://drive.google.com/file/d/1P_8-Lgpmx0Ky7cFb1yYppRK0wO8muU4d/view" target="_blank" rel="noopener">PDF</a> | <a href="https://docs.google.com/spreadsheets/d/1rQT43fvyasBy4QBe74mr5pNUlz9JvriNPNqKgqBzNl8/edit" target="_blank" rel="noopener">Sheet</a></div></div>
+<div class="card" id="drafts"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span class="k" style="margin:0">Saved drafts</span><span class="note" id="saveState">New plan, not saved yet</span></div><div id="draftList" class="note" style="margin-top:6px">Loading saved drafts...</div><button type="button" class="ghost" id="newBtn" style="margin-top:8px">Start a new plan</button><div class="note" style="margin-top:6px">Plans save automatically as you go, so you can start on your phone and finish on your laptop.</div></div>
 <div class="card"><div class="grid">
   <div><span class="k req">Property address</span><input type="text" id="addr" placeholder="e.g. 14 Prince Edward Avenue, Culburra Beach NSW 2540"></div>
   <div class="lookup"><span class="k">Owner name</span><input type="text" id="owner" placeholder="Type a name or email to search ActiveCampaign" autocomplete="off"><div id="acList"></div><div class="hint" id="acHint"></div></div>
@@ -164,6 +172,7 @@ function tally() {
   document.getElementById('tot').textContent = t+(t===1?' item':' items');
   document.getElementById('totS').textContent = 'in '+secs.length+(secs.length===1?' area':' areas');
   if (document.getElementById('preview').style.display==='block') preview();
+  markDirty();
 }
 function preview() {
   var byId = {}; LIB.forEach(function (x) { byId[x.item_id] = x; });
@@ -215,15 +224,87 @@ function acSearch() {
     hint.textContent = list.length ? '' : 'No match in ActiveCampaign. Type the details in.';
     box.innerHTML = list.map(function (c, i) { return '<button type="button" data-i="' + i + '">' + esc(c.name || c.email) + '<small>' + esc(c.email) + (c.phone ? ' | ' + esc(c.phone) : '') + '</small>' + (c.address ? '<small>' + esc(c.address) + '</small>' : '') + '</button>'; }).join('');
     box.style.display = list.length ? 'block' : 'none';
-    box.querySelectorAll('button').forEach(function (b) { b.onclick = function () { var c = list[+b.dataset.i]; document.getElementById('owner').value = c.name || ''; document.getElementById('oemail').value = c.email || ''; if (c.address) document.getElementById('addr').value = c.address; acHide(); hint.textContent = c.address ? 'Filled from ActiveCampaign.' : 'Filled from ActiveCampaign. No property address on file, type it in.'; }; });
+    box.querySelectorAll('button').forEach(function (b) { b.onclick = function () { var c = list[+b.dataset.i]; document.getElementById('owner').value = c.name || ''; document.getElementById('oemail').value = c.email || ''; if (c.address) document.getElementById('addr').value = c.address; acHide(); markDirty(); hint.textContent = c.address ? 'Filled from ActiveCampaign.' : 'Filled from ActiveCampaign. No property address on file, type it in.'; }; });
   })
   .catch(function () { if (seq === acSeq) hint.textContent = 'Lookup unavailable. Type the details in.'; });
 }
 document.getElementById('owner').addEventListener('input', function () { clearTimeout(acTimer); acTimer = setTimeout(acSearch, 350); });
 document.addEventListener('click', function (e) { if (!e.target.closest('.lookup')) acHide(); });
 ['hasGar','nLiv','nBed','nBth'].forEach(function (id) { document.getElementById(id).onchange = render; });
+function apiUrl(p) { return API + p + '?key=' + encodeURIComponent(KEY); }
+var FIELDS = ['addr','owner','oemail','atype','prep','hasGar','nLiv','nBed','nBth'], DEFAULTS = {};
+FIELDS.forEach(function (k) { DEFAULTS[k] = document.getElementById(k).value; });
+function newId() { var s = 'd', c = 'abcdefghijklmnopqrstuvwxyz0123456789'; for (var i = 0; i < 12; i++) s += c[Math.floor(Math.random() * 36)]; return s; }
+var DRAFT_ID = newId(), dirty = false, saving = false, saveTimer = null, quiet = true;
+function setSaveState(t) { document.getElementById('saveState').textContent = t; }
+function hasContent() { return !!(document.getElementById('addr').value.trim() || collect().length); }
+function fmtWhen(v) { var d = new Date(v); if (isNaN(d)) return ''; return d.toLocaleString([], { day:'numeric', month:'short', hour:'numeric', minute:'2-digit' }); }
+function markDirty() {
+  if (quiet) return;
+  dirty = true;
+  if (!hasContent()) return;
+  setSaveState('Unsaved changes');
+  clearTimeout(saveTimer); saveTimer = setTimeout(saveDraft, 2500);
+}
+function saveDraft() {
+  if (saving) { clearTimeout(saveTimer); saveTimer = setTimeout(saveDraft, 1500); return Promise.resolve(); }
+  if (!dirty || !hasContent()) return Promise.resolve();
+  clearTimeout(saveTimer); saving = true; dirty = false; setSaveState('Saving...');
+  var f = {}; FIELDS.forEach(function (k) { f[k] = document.getElementById(k).value; });
+  return fetch(apiUrl('pip-draft-save'), { method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ draft_id: DRAFT_ID, address: f.addr.trim(), prepared_by: f.prep, data: { fields: f, state: state } }) })
+  .then(function (r) { return r.json(); })
+  .then(function (j) { if (!j || !j.ok) throw new Error('save'); setSaveState('Saved ' + fmtWhen(new Date())); loadList(); })
+  .catch(function () { dirty = true; setSaveState('Not saved, retrying...'); clearTimeout(saveTimer); saveTimer = setTimeout(saveDraft, 8000); })
+  .then(function () { saving = false; });
+}
+function loadList() {
+  var box = document.getElementById('draftList');
+  return fetch(apiUrl('pip-drafts')).then(function (r) { return r.json(); }).then(function (j) {
+    var list = ((j && j.drafts) || []).slice(0, 15);
+    if (!list.length) { box.innerHTML = 'No saved drafts yet.'; return; }
+    box.innerHTML = list.map(function (d) {
+      var cur = d.draft_id === DRAFT_ID;
+      return '<div class="drow' + (cur ? ' cur' : '') + '"><span><b>' + esc(d.address) + '</b><br><span class="note">' + esc(d.prepared_by) + ' | saved ' + esc(fmtWhen(d.saved)) + '</span></span><span class="acts">' +
+        (cur ? '' : '<button type="button" class="ghost" data-open="' + esc(d.draft_id) + '">Open</button>') + '<button type="button" class="ghost" data-del="' + esc(d.draft_id) + '">Delete</button></span></div>';
+    }).join('');
+    box.querySelectorAll('[data-open]').forEach(function (b) { b.onclick = function () { openDraft(b.dataset.open); }; });
+    box.querySelectorAll('[data-del]').forEach(function (b) { b.onclick = function () {
+      if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = 'Confirm delete'; return; }
+      deleteDraft(b.dataset.del);
+    }; });
+  }).catch(function () { box.textContent = 'Saved drafts are unavailable right now. Your work on this page is not affected.'; });
+}
+function applyDraft(id, data, savedAt) {
+  quiet = true;
+  var f = (data && data.fields) || {};
+  FIELDS.forEach(function (k) { document.getElementById(k).value = (f[k] != null ? f[k] : DEFAULTS[k]); });
+  state = (data && data.state) || {};
+  Object.keys(state).forEach(function (k) { var s = state[k] || (state[k] = {}); s.ticks = s.ticks || {}; s.comment = s.comment || ''; s.beds = s.beds || ''; s.photos = s.photos || []; });
+  DRAFT_ID = id; dirty = false; render(); quiet = false;
+  setSaveState(savedAt ? 'Opened, saved ' + fmtWhen(savedAt) : 'New plan, not saved yet');
+}
+function openDraft(id) {
+  setSaveState('Opening...');
+  saveDraft().then(function () { return fetch(apiUrl('pip-draft-load') + '&id=' + encodeURIComponent(id)); })
+  .then(function (r) { return r.json(); })
+  .then(function (j) { if (!j || !j.ok || !j.draft) throw new Error('load'); applyDraft(id, j.draft.data, j.draft.saved_at); loadList(); window.scrollTo(0, 0); })
+  .catch(function () { setSaveState('Could not open that draft. Try again.'); });
+}
+function deleteDraft(id) {
+  fetch(apiUrl('pip-draft-delete'), { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ draft_id: id }) })
+  .then(function (r) { return r.json(); })
+  .then(function () { if (id === DRAFT_ID) { clearTimeout(saveTimer); applyDraft(newId(), null, null); } loadList(); })
+  .catch(function () { setSaveState('Could not delete that draft. Try again.'); });
+}
+document.getElementById('newBtn').onclick = function () { saveDraft().then(function () { applyDraft(newId(), null, null); loadList(); window.scrollTo(0, 0); }); };
+['addr','owner','oemail'].forEach(function (id) { document.getElementById(id).addEventListener('input', markDirty); });
+['atype','prep'].forEach(function (id) { document.getElementById(id).addEventListener('change', markDirty); });
+window.addEventListener('beforeunload', function (e) { if (dirty && hasContent()) { saveDraft(); e.preventDefault(); e.returnValue = ''; } });
 document.getElementById('pvBtn').onclick = function () { var p=document.getElementById('preview'); p.style.display = p.style.display==='block'?'none':'block'; preview(); };
 document.getElementById('genBtn').onclick = generate;
 if (!LIB.length) showResult(false, 'The recommendation library could not be loaded. Check the library Sheet.');
 render();
+quiet = false;
+loadList();
 </script></body></html>
