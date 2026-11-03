@@ -1,0 +1,12 @@
+{
+  "name": "PHH Property Improvement Plan",
+  "short_name": "PHH Plans",
+  "start_url": "staff-checklist-sample.html",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#0873B5",
+  "icons": [
+    { "src": "pip-icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "pip-icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
